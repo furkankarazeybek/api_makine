@@ -226,7 +226,7 @@ elseif(empty($_GET)) {
       $SonMakine = $newTask->getSonMakine();
 
       // create db query
-      $query = $writeDB->prepare('insert into tbltasks (UrunKodu, HedefSayi,HedefSure,UretimMiktari,Ortalama,Sure,HedefIslem,IslemSuresi,MakinaNo,Personel,SonMakine) values (:UrunKodu, :HedefSayi, :HedefSure, :UretimMiktari, :Ortalama,:Sure, :HedefIslem, :IslemSuresi, :MakinaNo, :Personel, :SonMakine)');
+      $query = $writeDB->prepare('insert into tbltasks (UrunKodu, HedefSayi,HedefSure,UretimMiktari,Ortalama,Sure,HedefIslem,IslemSuresi,MakinaNo,Personel,SonMakine) values (:UrunKodu, :HedefSayi, :HedefSure, :UretimMiktari, :Ortalama,:Sure, :HedefIslem, :IslemSuresi, :MakinaNo, :Personel, :SonMakine) ON DUPLICATE KEY UPDATE UretimMiktari= values(UretimMiktari),Ortalama=values(ortalama),Sure=values(Sure),IslemSuresi=values(IslemSuresi)');
       $query->bindParam(':UrunKodu', $UrunKodu, PDO::PARAM_STR);
       $query->bindParam(':HedefSayi', $HedefSayi, PDO::PARAM_STR);
       $query->bindParam(':HedefSure', $HedefSure, PDO::PARAM_STR);
